@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">AI Agents Usage Guide</h1>
+<p class="lead">Learn how to use our five AI agents to enhance your business operations.</p>
+
+<div class="accordion" id="agentGuideAccordion">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="customerSupportHeading">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#customerSupportCollapse" aria-expanded="true" aria-controls="customerSupportCollapse">
+                Customer Support AI Agent
+            </button>
+        </h2>
+        <div id="customerSupportCollapse" class="accordion-collapse collapse show" aria-labelledby="customerSupportHeading" data-bs-parent="#agentGuideAccordion">
+            <div class="accordion-body">
+                <p>The Customer Support AI Agent provides quick answers to common customer inquiries based on a predefined FAQ.</p>
+                <h5>How to use:</h5>
+                <ol>
+                    <li>Navigate to the Customer Support page.</li>
+                    <li>Type your question in the input field.</li>
+                    <li>Click the "Ask" button to get an AI-generated response.</li>
+                </ol>
+                <h5>Example:</h5>
+                <p><strong>User Input:</strong> "What is your return policy?"</p>
+                <p><strong>AI Response:</strong> "Our return policy allows returns within 30 days of purchase with a valid receipt."</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="marketingCampaignHeading">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#marketingCampaignCollapse" aria-expanded="false" aria-controls="marketingCampaignCollapse">
+                Marketing Campaign AI Agent
+            </button>
+        </h2>
+        <div id="marketingCampaignCollapse" class="accordion-collapse collapse" aria-labelledby="marketingCampaignHeading" data-bs-parent="#agentGuideAccordion">
+            <div class="accordion-body">
+                <p>The Marketing Campaign AI Agent generates creative campaign ideas based on your product or target audience description.</p>
+                <h5>How to use:</h5>
+                <ol>
+                    <li>Go to the Marketing Campaign page.</li>
+                    <li>Describe your product or target audience in the text area.</li>
+                    <li>Click "Generate Campaign Idea" to receive an AI-generated campaign suggestion.</li>
+                </ol>
+                <h5>Example:</h5>
+                <p><strong>User Input:</strong> "Eco-friendly water bottles for health-conscious millennials"</p>
+                <p><strong>AI Response:</strong> "Based on your input 'Eco-friendly water bottles for health-conscious millennials', here's a campaign idea: Launch a social media contest encouraging users to share creative ways they've reduced plastic waste, with the chance to win a set of your eco-friendly water bottles."</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="salesNegotiatorHeading">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#salesNegotiatorCollapse" aria-expanded="false" aria-controls="salesNegotiatorCollapse">
+                Sales Negotiator AI Agent
+            </button>
+        </h2>
+        <div id="salesNegotiatorCollapse" class="accordion-collapse collapse" aria-labelledby="salesNegotiatorHeading" data-bs-parent="#agentGuideAccordion">
+            <div class="accordion-body">
+                <p>The Sales Negotiator AI Agent provides sample email responses for various sales scenarios to help with negotiations.</p>
+                <h5>How to use:</h5>
+                <ol>
+                    <li>Visit the Sales Negotiator page.</li>
+                    <li>Describe a sales scenario in the text area.</li>
+                    <li>Click "Generate Email Response" to get an AI-generated email template.</li>
+                </ol>
+                <h5>Example:</h5>
+                <p><strong>User Input:</strong> "Potential client concerned about the price of our software subscription"</p>
+                <p><strong>AI Response:</strong> "Here's a suggested email response:<br><br>Dear Valued Customer,<br><br>I understand your concerns about the price. Let me explain the value our product brings to your business. Our software subscription includes regular updates, priority support, and features that can significantly improve your productivity. We're confident that the return on investment will far exceed the initial cost.<br><br>Best regards,<br>Your Sales Team"</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="financialPortfolioHeading">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#financialPortfolioCollapse" aria-expanded="false" aria-controls="financialPortfolioCollapse">
+                Financial Portfolio AI Agent
+            </button>
+        </h2>
+        <div id="financialPortfolioCollapse" class="accordion-collapse collapse" aria-labelledby="financialPortfolioHeading" data-bs-parent="#agentGuideAccordion">
+            <div class="accordion-body">
+                <p>The Financial Portfolio AI Agent provides an overview and analysis of a mock investment portfolio.</p>
+                <h5>How to use:</h5>
+                <ol>
+                    <li>Navigate to the Financial Portfolio page.</li>
+                    <li>View the displayed mock portfolio data.</li>
+                    <li>Check the AI-generated analysis for insights on asset allocation and total portfolio value.</li>
+                </ol>
+                <h5>Example:</h5>
+                <p>The page will display a table of assets and their values, along with an AI-generated analysis like this:</p>
+                <pre>Total portfolio value: $33,000.00
+
+Asset Allocation:
+Stock: 54.55%
+Bond: 15.15%
+Real Estate: 21.21%
+Commodity: 9.09%</pre>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="workflowAutomationHeading">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#workflowAutomationCollapse" aria-expanded="false" aria-controls="workflowAutomationCollapse">
+                Workflow Automation AI Agent
+            </button>
+        </h2>
+        <div id="workflowAutomationCollapse" class="accordion-collapse collapse" aria-labelledby="workflowAutomationHeading" data-bs-parent="#agentGuideAccordion">
+            <div class="accordion-body">
+                <p>The Workflow Automation AI Agent helps manage and track tasks within your team or project.</p>
+                <h5>How to use:</h5>
+                <ol>
+                    <li>Go to the Workflow Automation page.</li>
+                    <li>Add new tasks using the form provided.</li>
+                    <li>View and update the status of existing tasks in the task list.</li>
+                    <li>Use the dropdown menu to change the status of tasks (New, In Progress, Completed).</li>
+                </ol>
+                <h5>Example:</h5>
+                <p><strong>Adding a new task:</strong></p>
+                <ul>
+                    <li>Task Name: "Create Q4 Marketing Plan"</li>
+                    <li>Assigned To: "John Doe"</li>
+                    <li>Due Date: "2024-12-15"</li>
+                </ul>
+                <p>After adding the task, it will appear in the task list where you can update its status as needed (New, In Progress, or Completed).</p>
+                <p><strong>Updating task status:</strong></p>
+                <p>Use the dropdown menu next to each task to change its status. The AI agent will automatically update the task status in the database.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
