@@ -1,8 +1,10 @@
 from flask import render_template, request, jsonify, redirect, url_for, flash
 from flask_login import login_user, login_required, logout_user, current_user
+from urllib.parse import urlparse
 from app import app, db
 from models import Interaction, PortfolioData, WorkflowTask, User
 from ai_agents import customer_support, marketing_campaign, sales_negotiator, financial_portfolio, workflow_automation
+import re
 
 @app.route('/')
 def index():
@@ -12,6 +14,15 @@ def index():
 def guide():
     return render_template('guide.html')
 
+def is_password_strong(password):
+    # Check if password is at least 8 characters long
+    if len(password) < 8:
+        return False
+    # Check if password contains at least one uppercase letter, one lowercase letter, and one number
+    if not re.search(r'[A-Z]', password) or not re.search(r'[a-z]', password) or not re.search(r'\d', password):
+        return False
+    return True
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -20,6 +31,9 @@ def register():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
+        if not is_password_strong(password):
+            flash('Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number.')
+            return redirect(url_for('register'))
         user = User.query.filter_by(username=username).first()
         if user:
             flash('Username already exists')
@@ -48,7 +62,10 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         login_user(user)
-        return redirect(url_for('index'))
+        next_page = request.args.get('next')
+        if not next_page or urlparse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect(next_page)
     return render_template('login.html')
 
 @app.route('/logout')
