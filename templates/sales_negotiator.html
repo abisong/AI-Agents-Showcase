@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Sales Negotiator AI Agent</h1>
+<p class="lead">Describe a sales scenario, and our AI will generate a sample email response for your sales lead.</p>
+
+<form method="POST" action="{{ url_for('sales_negotiator_route') }}">
+    <div class="mb-3">
+        <label for="user_input" class="form-label">Sales Scenario:</label>
+        <textarea class="form-control" id="user_input" name="user_input" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Generate Email Response</button>
+</form>
+
+{% if ai_response %}
+<div class="mt-4">
+    <h3>AI Generated Email Response:</h3>
+    <pre class="bg-light p-3 rounded">{{ ai_response }}</pre>
+</div>
+{% endif %}
+{% endblock %}

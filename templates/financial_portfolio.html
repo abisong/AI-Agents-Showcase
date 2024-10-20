@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Financial Portfolio AI Agent</h1>
+<p class="lead">View your mock portfolio data and AI-generated analysis.</p>
+
+<div class="row">
+    <div class="col-md-6">
+        <h3>Portfolio Data</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Asset Name</th>
+                    <th>Asset Value</th>
+                    <th>Asset Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for asset in portfolio_data %}
+                <tr>
+                    <td>{{ asset.asset_name }}</td>
+                    <td>${{ "%.2f"|format(asset.asset_value) }}</td>
+                    <td>{{ asset.asset_type }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-6">
+        <h3>AI Analysis</h3>
+        <pre class="bg-light p-3 rounded">{{ analysis }}</pre>
+    </div>
+</div>
+{% endblock %}

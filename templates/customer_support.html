@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Customer Support AI Agent</h1>
+<p class="lead">Ask a question about our products or services, and our AI will provide an answer based on common FAQs.</p>
+
+<form method="POST" action="{{ url_for('customer_support_route') }}">
+    <div class="mb-3">
+        <label for="user_input" class="form-label">Your Question:</label>
+        <input type="text" class="form-control" id="user_input" name="user_input" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Ask</button>
+</form>
+
+{% if ai_response %}
+<div class="mt-4">
+    <h3>AI Response:</h3>
+    <p class="bg-light p-3 rounded">{{ ai_response }}</p>
+</div>
+{% endif %}
+{% endblock %}

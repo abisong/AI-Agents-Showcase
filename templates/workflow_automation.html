@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Workflow Automation AI Agent</h1>
+<p class="lead">Manage and track tasks with our automation tool.</p>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h3>Add New Task</h3>
+        <form method="POST" action="{{ url_for('workflow_automation_route') }}">
+            <div class="mb-3">
+                <label for="task_name" class="form-label">Task Name:</label>
+                <input type="text" class="form-control" id="task_name" name="task_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="assigned_to" class="form-label">Assigned To:</label>
+                <input type="text" class="form-control" id="assigned_to" name="assigned_to" required>
+            </div>
+            <div class="mb-3">
+                <label for="due_date" class="form-label">Due Date:</label>
+                <input type="date" class="form-control" id="due_date" name="due_date" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Task</button>
+        </form>
+    </div>
+</div>
+
+<h3>Task List</h3>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Task Name</th>
+            <th>Assigned To</th>
+            <th>Status</th>
+            <th>Due Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in tasks %}
+        <tr>
+            <td>{{ task.task_name }}</td>
+            <td>{{ task.assigned_to }}</td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.due_date }}</td>
+            <td>
+                <select class="form-select status-select" data-task-id="{{ task.id }}">
+                    <option value="New" {% if task.status == 'New' %}selected{% endif %}>New</option>
+                    <option value="In Progress" {% if task.status == 'In Progress' %}selected{% endif %}>In Progress</option>
+                    <option value="Completed" {% if task.status == 'Completed' %}selected{% endif %}>Completed</option>
+                </select>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

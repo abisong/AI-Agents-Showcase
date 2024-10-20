@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mb-4">Marketing Campaign AI Agent</h1>
+<p class="lead">Describe your product or target audience, and our AI will generate a marketing campaign idea.</p>
+
+<form method="POST" action="{{ url_for('marketing_campaign_route') }}">
+    <div class="mb-3">
+        <label for="user_input" class="form-label">Product or Target Audience Description:</label>
+        <textarea class="form-control" id="user_input" name="user_input" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Generate Campaign Idea</button>
+</form>
+
+{% if ai_response %}
+<div class="mt-4">
+    <h3>AI Generated Campaign Idea:</h3>
+    <p class="bg-light p-3 rounded">{{ ai_response }}</p>
+</div>
+{% endif %}
+{% endblock %}
