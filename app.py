@@ -30,5 +30,6 @@ def load_user(user_id):
 with app.app_context():
     import models
     db.create_all()
+    db.session.commit()
 
 from routes import *
