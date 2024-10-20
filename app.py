@@ -29,7 +29,8 @@ def load_user(user_id):
 
 with app.app_context():
     import models
-    db.create_all()
+    db.drop_all()  # Drop all existing tables
+    db.create_all()  # Recreate all tables with updated schema
     db.session.commit()
 
 from routes import *
