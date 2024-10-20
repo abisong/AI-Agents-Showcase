@@ -1,6 +1,7 @@
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, redirect, url_for, flash
+from flask_login import login_user, login_required, logout_user, current_user
 from app import app, db
-from models import Interaction, PortfolioData, WorkflowTask
+from models import Interaction, PortfolioData, WorkflowTask, User
 from ai_agents import customer_support, marketing_campaign, sales_negotiator, financial_portfolio, workflow_automation
 
 @app.route('/')
@@ -11,7 +12,53 @@ def index():
 def guide():
     return render_template('guide.html')
 
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        if user:
+            flash('Username already exists')
+            return redirect(url_for('register'))
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash('Email already exists')
+            return redirect(url_for('register'))
+        new_user = User(username=username, email=email)
+        new_user.set_password(password)
+        db.session.add(new_user)
+        db.session.commit()
+        flash('Congratulations, you are now a registered user!')
+        return redirect(url_for('login'))
+    return render_template('register.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        user = User.query.filter_by(username=username).first()
+        if user is None or not user.check_password(password):
+            flash('Invalid username or password')
+            return redirect(url_for('login'))
+        login_user(user)
+        return redirect(url_for('index'))
+    return render_template('login.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
 @app.route('/customer_support', methods=['GET', 'POST'])
+@login_required
 def customer_support_route():
     if request.method == 'POST':
         user_input = request.form['user_input']
@@ -23,6 +70,7 @@ def customer_support_route():
     return render_template('customer_support.html')
 
 @app.route('/marketing_campaign', methods=['GET', 'POST'])
+@login_required
 def marketing_campaign_route():
     if request.method == 'POST':
         user_input = request.form['user_input']
@@ -34,6 +82,7 @@ def marketing_campaign_route():
     return render_template('marketing_campaign.html')
 
 @app.route('/sales_negotiator', methods=['GET', 'POST'])
+@login_required
 def sales_negotiator_route():
     if request.method == 'POST':
         user_input = request.form['user_input']
@@ -45,12 +94,14 @@ def sales_negotiator_route():
     return render_template('sales_negotiator.html')
 
 @app.route('/financial_portfolio')
+@login_required
 def financial_portfolio_route():
     portfolio_data = PortfolioData.query.all()
     analysis = financial_portfolio(portfolio_data)
     return render_template('financial_portfolio.html', portfolio_data=portfolio_data, analysis=analysis)
 
 @app.route('/workflow_automation', methods=['GET', 'POST'])
+@login_required
 def workflow_automation_route():
     if request.method == 'POST':
         task_name = request.form['task_name']
@@ -63,6 +114,7 @@ def workflow_automation_route():
     return render_template('workflow_automation.html', tasks=tasks)
 
 @app.route('/update_task_status', methods=['POST'])
+@login_required
 def update_task_status():
     task_id = request.form['task_id']
     new_status = request.form['new_status']
